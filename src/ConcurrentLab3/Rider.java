@@ -8,21 +8,29 @@ import java.util.concurrent.Semaphore;
 public class Rider extends Thread {
     int riderID;
     Bus bus;
+    BusHalt busHalt;
 
-    public Rider(char riderID, Bus bus){
+    public Rider(int riderID, BusHalt busHalt){
         this.riderID = riderID;
-        this.bus = bus;
+        this.busHalt = busHalt;
+
     }
 
     public void run(){
-        try {
-            bus.passengers.acquire();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+
+        while(!busHalt.busArrived){
         }
+        this.boardBus();
+
     }
 
     public void boardBus(){
-        System.out.println("The bus " + riderID + " boarded on bus");
+        try {
+            busHalt.passengers.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        busHalt.acquiredRiders++;
+        System.out.println("The rider " + riderID + " boarded on bus " +busHalt.acquiredRiders);
     }
 }

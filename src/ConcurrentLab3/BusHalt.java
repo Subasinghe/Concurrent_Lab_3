@@ -1,23 +1,30 @@
 package ConcurrentLab3;
 
 import java.util.concurrent.Semaphore;
+import java.io.*;
 
 /**
  * Created by chamil on 8/19/15.
  */
 public class BusHalt {
     Semaphore busMutex;
-    int acquiredBusID;
+    Semaphore passengers;
+    boolean busArrived;
+    int acquiredRiders;
 
     public BusHalt(){
         busMutex = new Semaphore(1);
-        acquiredBusID = 0;
+        passengers = new Semaphore(50);
+        busArrived = false;
+        acquiredRiders = 0;
     }
     public void startProcedure(){
+
+
 
     }
 
     public void setAcquiredBusID(int acquiredBusID){
-        this.acquiredBusID = acquiredBusID;
+        this.acquiredRiders = acquiredRiders;
     }
 }
